@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="service-system-client" />
+        <module name="xxl-job-core" />
+        <module name="service-album-client" />
+        <module name="service-order-client" />
+        <module name="service-user-client" />
+        <module name="service-account-client" />
+        <module name="service-order" />
+        <module name="service-user" />
+        <module name="service-dispatch" />
+        <module name="model" />
+        <module name="xxl-job-admin" />
+        <module name="xxl-job-executor-sample-springboot" />
+        <module name="service-payment" />
+        <module name="server-gateway" />
+        <module name="service-search-client" />
+        <module name="common-util" />
+        <module name="service-album" />
+        <module name="xxl-job-executor-sample-frameless" />
+        <module name="common-log" />
+        <module name="service-util" />
+        <module name="service-live" />
+        <module name="rabbit-util" />
+        <module name="service-cdc" />
+        <module name="service-search" />
+        <module name="service-comment" />
+        <module name="service-account" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="17" />
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="common" options="-parameters" />
+      <module name="common-log" options="-parameters" />
+      <module name="common-util" options="-parameters" />
+      <module name="model" options="-parameters" />
+      <module name="rabbit-util" options="-parameters" />
+      <module name="server-gateway" options="-parameters" />
+      <module name="service" options="-parameters" />
+      <module name="service-account" options="-parameters" />
+      <module name="service-account-client" options="-parameters" />
+      <module name="service-album" options="-parameters" />
+      <module name="service-album-client" options="-parameters" />
+      <module name="service-cdc" options="-parameters" />
+      <module name="service-client" options="-parameters" />
+      <module name="service-comment" options="-parameters" />
+      <module name="service-dispatch" options="-parameters" />
+      <module name="service-live" options="-parameters" />
+      <module name="service-order" options="-parameters" />
+      <module name="service-order-client" options="-parameters" />
+      <module name="service-payment" options="-parameters" />
+      <module name="service-search" options="-parameters" />
+      <module name="service-search-client" options="-parameters" />
+      <module name="service-system-client" options="-parameters" />
+      <module name="service-user" options="-parameters" />
+      <module name="service-user-client" options="-parameters" />
+      <module name="service-util" options="-parameters" />
+      <module name="tingshu-parent" options="-parameters" />
+    </option>
+  </component>
+</project>

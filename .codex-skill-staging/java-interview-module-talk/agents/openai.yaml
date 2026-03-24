@@ -1,0 +1,4 @@
+interface:
+  display_name: "Java面试话术通用Skill"
+  short_description: "面向Java项目模块的可背诵面试话术与追问生成"
+  default_prompt: "Use $java-interview-module-talk to generate a 4-minute Chinese interview script and follow-up Q&A for a Java project module, grounded in the real code when available."

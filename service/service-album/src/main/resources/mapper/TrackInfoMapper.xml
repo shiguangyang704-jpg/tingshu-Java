@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.atguigu.tingshu.album.mapper.TrackInfoMapper">
+
+    <!--
+        sql 片段;
+    -->
+    <sql id="trackInfoSql">
+        track.id track_id,
+            track.album_id,
+            track.track_title,
+            track.cover_url,
+            track.media_duration,
+            track.status,
+            max(if(stat.stat_type='0701',stat.stat_num,0)) as playStatNum,
+            max(if(stat.stat_type='0702',stat.stat_num,0)) as collectStatNum,
+            max(if(stat.stat_type='0703',stat.stat_num,0)) as praiseStatNum,
+            max(if(stat.stat_type='0704',stat.stat_num,0)) as commentStatNum
+    </sql>
+    <!--
+        resultMap:
+            多表关系映射：1对多 多对1
+        resultType:
+            单表： select * from ablum_info; : 通过一次查询就能将数据获取到并赋值给当前的实体类！
+
+         where track.user_id = 1
+    -->
+
+    <select id="selectUserTrackPage" resultType="com.atguigu.tingshu.vo.album.TrackListVo">
+        select
+        <include refid="trackInfoSql"></include>
+        from track_info track inner join track_stat stat on track.id = stat.track_id
+        <where>
+            <if test="vo.userId != null and vo.userId != ''">
+                track.user_id = #{vo.userId}
+            </if>
+            <if test="vo.status != null and vo.status != ''">
+                and track.status = #{vo.status}
+            </if>
+            <if test="vo.trackTitle != null and vo.trackTitle != ''">
+                and track.track_title like concat('%',#{vo.trackTitle},'%')
+            </if>
+            and track.is_deleted = 0 and stat.is_deleted = 0
+        </where>
+        group by track.id
+        order by track.id desc
+
+    </select>
+    <select id="selectAlbumTrackPage" resultType="com.atguigu.tingshu.vo.album.AlbumTrackListVo">
+        select
+            track.id track_id,
+            track.track_title,
+            track.media_duration,
+            track.order_num,
+            track.create_time,
+            max(if(stat.stat_type = '0701', stat.stat_num, 0)) playStatNum,
+            max(if(stat.stat_type = '0704', stat.stat_num, 0)) commentStatNum
+        from track_info track inner join track_stat stat on track.id = stat.track_id
+        where track.album_id = #{albumId} and track.is_deleted = 0 and stat.is_deleted = 0
+        group by track.id
+    </select>
+</mapper>
+

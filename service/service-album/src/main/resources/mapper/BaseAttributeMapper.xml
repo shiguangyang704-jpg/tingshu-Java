@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.atguigu.tingshu.album.mapper.BaseAttributeMapper">
+
+
+    <!--
+        id:表示map的唯一标识;
+        type:表示返回的数据类型;
+        autoMapping:表示是否自动映射，默认是true;
+    -->
+    <resultMap id="attributeMap" type="com.atguigu.tingshu.model.album.BaseAttribute" autoMapping="true">
+        <!--
+            id: 表示主键;
+            property:表示实体类的属性名;
+            column:表示数据库的字段名;
+        -->
+        <id property="id" column="id"></id>
+        <!--
+        表示普通字段：现在有autoMapping所以不需要写！
+        -->
+        <!-- <result property="attributeName" column="attribute_name"></result>-->
+        <!--
+            在这个实体类中有一个属性在表中根本不存在！List<BaseAttributeValue> attributeValueList;
+        -->
+        <collection property="attributeValueList" ofType="com.atguigu.tingshu.model.album.BaseAttributeValue" autoMapping="true">
+            <!--
+                如果有字段重名需要起别名;
+            -->
+            <id property="id" column="attribute_value_id"></id>
+        </collection>
+    </resultMap>
+    <!--
+        根据一级分类Id查询属性与属性值;
+        mybatis知识回顾：
+            select,insert,update,delete
+            id:表示方法名称
+            resultType:返回一个具体的数据类型：单表查询的时间;
+                select id,category1_id,attribute_name from base-attribute; resultType=BaseAttribute;
+            resultMap:多表关系映射 select * from a inner join b on a.id = b.aid;
+    -->
+    <select id="selectAttribute" resultMap="attributeMap">
+        select
+            ba.id,
+            ba.category1_id,
+            ba.attribute_name,
+            bav.id attribute_value_id,
+            bav.attribute_id,
+            bav.value_name
+        from base_attribute ba inner join base_attribute_value bav
+                                          on ba.id = bav.attribute_id
+        where ba.category1_id = #{category1Id} and ba.is_deleted = 0 and bav.is_deleted = 0
+    </select>
+</mapper>
+

@@ -1,0 +1,4 @@
+interface:
+  display_name: "包装项目话术"
+  short_description: "基于真实代码生成业务逻辑、难点、优化三段式模块话术"
+  default_prompt: "Use $project-talk-packaging to explain a Java backend project module in Chinese with a clear main flow first, then business logic, implementation difficulties, and optimizations, grounded in the real code."
